@@ -1,0 +1,205 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #0b2a4a;
+    margin: 0;
+}
+
+/* CENTERED CARD */
+.container {
+    width: 800px;
+    max-width: 90%;
+    margin: 80px auto; /* simple vertical spacing */
+    background: #fff;
+    padding: 24px;
+    border-radius: 6px;
+}
+
+h1, h2 {
+    text-align: center;
+    color: #1c3d6e;
+}
+
+hr {
+    border: 2px solid #d4a017;
+    margin: 10px 0 20px;
+}
+
+a {
+    color: #1c3d6e;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+button {
+    background: #1c3d6e;
+    color: white;
+    padding: 8px 14px;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #16325a;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 12px;
+    box-sizing: border-box;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead {
+    background: #1c3d6e;
+    color: white;
+}
+
+th,
+td {
+    padding: 10px;
+    text-align: left;
+}
+
+tr:nth-child(even) {
+    background: #f2f2f2;
+}
+
+.actions {
+    margin-bottom: 10px;
+}
+
+.actions form {
+    margin: 0;
+}
+
+.error {
+    color: red;
+    margin-bottom: 10px;
+}
+
+.notice {
+    color: red;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.alert {
+    padding: 12px;
+    border-radius: 6px;
+    margin-bottom: 12px;
+    text-align: center;
+    font-weight: bold;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.alert-error {
+    background: #f8d7da;
+    color: #842029;
+    border: 1px solid #f1aeb5;
+}
+
+.alert-success {
+    background: #d1e7dd;
+    color: #0f5132;
+    border: 1px solid #a3cfbb;
+}
+
+.role {
+    color: #666;
+    font-size: 13px;
+}
+
+.search-bar {
+    display: flex;
+    align-items: stretch;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.search-bar input {
+    flex: 1;
+    height: 34px;
+    margin-bottom: 0;
+}
+
+.search-bar button,
+.search-bar .btn-linkish {
+    height: 34px;
+    padding: 0 12px;
+}
+
+.btn-linkish {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #e9ecef;
+    color: #1c3d6e;
+    text-decoration: none;
+    min-width: 58px;
+}
+
+.btn-linkish:hover {
+    text-decoration: none;
+    background: #dde2e6;
+}
+
+.form-actions {
+    margin-top: 12px;
+}
+
+.form-actions a {
+    margin-right: 10px;
+}
+
+.table-wrap {
+    margin-top: 10px;
+}
+
+.home-actions {
+    display: grid;
+    gap: 10px;
+}
+
+.home-actions > a {
+    display: block;
+    padding: 14px;
+    background: #f7f7f7;
+    border: 1px solid #d9d9d9;
+    text-decoration: none;
+    color: #1c3d6e;
+}
+
+.home-actions > a:hover {
+    text-decoration: none;
+    background: #efefef;
+}
+
+.home-actions form button {
+    width: 100%;
+    text-align: left;
+    padding: 14px;
+}
+
+.btn-logout {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    background: #dc3545;
+    color: white;
+    cursor: pointer;
+    text-align: left;
+    font-size: 14px;
+}
+
+.btn-logout:hover {
+    background: #bb2d3b;
+}
