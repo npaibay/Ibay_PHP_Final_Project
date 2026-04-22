@@ -6,7 +6,7 @@
 <hr>
 
 <div class="actions">
-    <a href="{{ route('subjects.index') }}">Back to Subjects</a>
+    <a href="{{ route('subjects.index') }}">← Back to Subjects</a>
 </div>
 
 @if($errors->any())

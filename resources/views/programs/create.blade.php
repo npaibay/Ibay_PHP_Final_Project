@@ -1,96 +1,61 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Program - School System</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f4f6f9;
-            margin: 0;
-            padding: 0;
-        }
+@extends('layouts.app')
 
-        .container {
-            width: 500px;
-            margin: 50px auto;
-            background: #fff;
-            padding: 24px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
+@section('content')
 
-        label {
-            display: block;
-            margin-top: 12px;
-            margin-bottom: 6px;
-            font-weight: bold;
-        }
+<h2>Programs</h2>
+<hr>
 
-        input {
-            width: 100%;
-            padding: 10px;
-            box-sizing: border-box;
-        }
+<div class="actions">
+    <a href="{{ route('home') }}">← Back to Home</a>
+    @if(in_array($account_type, ['admin', 'staff']))
+        | <a href="{{ route('programs.create') }}">Add New Program</a>
+    @endif
+</div>
 
-        .actions {
-            margin-top: 18px;
-        }
+<form method="GET" class="search-bar">
+    <input
+        type="text"
+        name="search"
+        value="{{ request('search') }}"
+        placeholder="Search by program code"
+    >
 
-        .actions button,
-        .actions a {
-            display: inline-block;
-            padding: 10px 14px;
-            border: none;
-            border-radius: 6px;
-            text-decoration: none;
-            background: #0d6efd;
-            color: white;
-            cursor: pointer;
-        }
+    <button type="submit">Search</button>
 
-        .actions a {
-            background: #6c757d;
-        }
+    <a href="{{ route('programs.index') }}" class="btn-linkish">Reset</a>
+</form>
 
-        .errors {
-            margin-bottom: 12px;
-            color: #842029;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h2>Add Program</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Code</th>
+            <th>Title</th>
+            <th>Years</th>
+            @if(in_array($account_type, ['admin', 'staff']))
+                <th>Action</th>
+            @endif
+        </tr>
+    </thead>
+    <tbody>
+        @forelse($programs as $program)
+            <tr>
+                <td>{{ $program->code }}</td>
+                <td>{{ $program->title }}</td>
+                <td>{{ $program->years }}</td>
+                @if(in_array($account_type, ['admin', 'staff']))
+                    <td>
+                        <a href="{{ route('programs.edit', $program->program_id) }}">Edit</a>
+                    </td>
+                @endif
+            </tr>
+        @empty
+            <tr>
+                <td colspan="{{ in_array($account_type, ['admin', 'staff']) ? 4 : 3 }}">
+                    No programs found.
+                </td>
+            </tr>
+        @endforelse
+    </tbody>
+</table>
 
-        @if($errors->any())
-            <div class="errors">
-                <ul>
-                    @foreach($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-
-        <form method="POST" action="{{ route('programs.store') }}">
-            @csrf
-
-            <label for="code">Code</label>
-            <input type="text" id="code" name="code" value="{{ old('code') }}" required>
-
-            <label for="title">Title</label>
-            <input type="text" id="title" name="title" value="{{ old('title') }}" required>
-
-            <label for="years">Years</label>
-            <input type="number" id="years" name="years" value="{{ old('years') }}" min="1" required>
-
-            <div class="actions">
-                <button type="submit">Save</button>
-                <a href="{{ route('programs.index') }}">Cancel</a>
-            </div>
-        </form>
-    </div>
-</body>
-</html>
+@endsection

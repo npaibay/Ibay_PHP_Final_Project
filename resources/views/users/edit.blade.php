@@ -6,7 +6,7 @@
 <hr>
 
 <div class="actions">
-    <a href="{{ route('users.index') }}">Back to Users</a>
+    <a href="{{ route('users.index') }}">← Back to Users</a>
 </div>
 
 @if($errors->any())

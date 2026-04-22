@@ -8,7 +8,7 @@
 <div class="actions">
     <a href="{{ route('home') }}">← Back to Home</a>
     @if(in_array($account_type, ['admin', 'staff']))
-        | <a href="{{ route('subjects.create') }}">Add New Subject</a>
+        | <a href="{{ route('programs.create') }}">Add New Program</a>
     @endif
 </div>
 
