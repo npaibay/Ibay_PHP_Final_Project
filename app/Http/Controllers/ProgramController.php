@@ -24,11 +24,18 @@ class ProgramController extends Controller
 
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'code' => 'required|string|max:50|unique:program,code',
-            'title' => 'required|string|max:100',
-            'years' => 'required|integer|min:1|max:10',
-        ]);
+        $validated = $request->validate(
+            [
+                'code' => 'required|string|max:50|unique:program,code',
+                'title' => 'required|string|max:100',
+                'years' => 'required|integer|min:1|max:12',
+            ],
+            [
+                'code.unique' => 'Program code already exists.',
+                'years.min' => 'Years must be at least 1.',
+                'years.max' => 'Years must not exceed 12.',
+            ]
+        );
 
         $validated['created_on'] = now();
         $validated['created_by'] = session('user_id');
@@ -49,11 +56,18 @@ class ProgramController extends Controller
 
     public function update(Request $request, Program $program)
     {
-        $validated = $request->validate([
-            'code' => 'required|string|max:50|unique:program,code,' . $program->program_id . ',program_id',
-            'title' => 'required|string|max:100',
-            'years' => 'required|integer|min:1|max:10',
-        ]);
+        $validated = $request->validate(
+            [
+                'code' => 'required|string|max:50|unique:program,code,' . $program->program_id . ',program_id',
+                'title' => 'required|string|max:100',
+                'years' => 'required|integer|min:1|max:12',
+            ],
+            [
+                'code.unique' => 'Program code already exists.',
+                'years.min' => 'Years must be at least 1.',
+                'years.max' => 'Years must not exceed 12.',
+            ]
+        );
 
         $validated['updated_on'] = now();
         $validated['updated_by'] = session('user_id');

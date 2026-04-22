@@ -25,11 +25,19 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'username' => 'required|string|max:50|unique:users,username',
-            'password' => 'required|string|min:6|confirmed',
-            'account_type' => ['required', Rule::in(['admin', 'staff', 'teacher', 'student'])],
-        ]);
+        $validated = $request->validate(
+            [
+                'username' => 'required|string|max:50|unique:users,username',
+                'password' => 'required|string|min:8|confirmed',
+                'account_type' => ['required', Rule::in(['admin', 'staff', 'teacher', 'student'])],
+            ],
+            [
+                'username.unique' => 'Username already exists.',
+                'password.min' => 'Password must be at least 8 characters.',
+                'password.confirmed' => 'Password confirmation does not match.',
+                'account_type.in' => 'Please select a valid account type.',
+            ]
+        );
 
         User::create([
             'username' => $validated['username'],
@@ -53,16 +61,24 @@ class UserController extends Controller
 
     public function update(Request $request, User $user)
     {
-        $validated = $request->validate([
-            'username' => [
-                'required',
-                'string',
-                'max:50',
-                Rule::unique('users', 'username')->ignore($user->id, 'id'),
+        $validated = $request->validate(
+            [
+                'username' => [
+                    'required',
+                    'string',
+                    'max:50',
+                    Rule::unique('users', 'username')->ignore($user->id, 'id'),
+                ],
+                'account_type' => ['required', Rule::in(['admin', 'staff', 'teacher', 'student'])],
+                'password' => 'nullable|string|min:8|confirmed',
             ],
-            'account_type' => ['required', Rule::in(['admin', 'staff', 'teacher', 'student'])],
-            'password' => 'nullable|string|min:6|confirmed',
-        ]);
+            [
+                'username.unique' => 'Username already exists.',
+                'password.min' => 'Password must be at least 8 characters.',
+                'password.confirmed' => 'Password confirmation does not match.',
+                'account_type.in' => 'Please select a valid account type.',
+            ]
+        );
 
         $data = [
             'username' => $validated['username'],

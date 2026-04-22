@@ -10,12 +10,10 @@
 </div>
 
 @if($errors->any())
-    <div class="notice">
-        <ul>
-            @foreach($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
+    <div class="alert alert-error" style="text-align: center;">
+        @foreach($errors->all() as $error)
+            <div>{{ $error }}</div>
+        @endforeach
     </div>
 @endif
 

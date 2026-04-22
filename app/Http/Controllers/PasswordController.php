@@ -15,10 +15,18 @@ class PasswordController extends Controller
 
     public function update(Request $request)
     {
-        $validated = $request->validate([
-            'current_password' => 'required|string',
-            'new_password' => 'required|string|min:8|confirmed',
-        ]);
+        $validated = $request->validate(
+            [
+                'current_password' => 'required|string',
+                'new_password' => 'required|string|min:8|confirmed',
+            ],
+            [
+                'current_password.required' => 'Current password is required.',
+                'new_password.required' => 'New password is required.',
+                'new_password.min' => 'New password must be at least 8 characters.',
+                'new_password.confirmed' => 'New password confirmation does not match.',
+            ]
+        );
 
         $user = User::findOrFail(session('user_id'));
 
